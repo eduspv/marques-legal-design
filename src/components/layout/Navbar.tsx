@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import logo from "@/assets/Logo/RmLogo-SemFundo.png";
 
 const navLinks = [
   { label: "Início", path: "/" },
@@ -35,13 +36,23 @@ const Navbar = () => {
       }`}
     >
       <div className="container-editorial flex items-center justify-between">
-        <Link to="/" className="relative z-10">
-          <span className="font-serif text-xl md:text-2xl font-light tracking-wide text-cream">
-            Ricardo Marques
-          </span>
-          <span className="hidden md:block text-[10px] tracking-[0.3em] uppercase text-gold font-sans font-light">
-            Advogados Associados
-          </span>
+        <Link to="/" className="relative z-10 flex items-center gap-4 group">
+          {/* LOGO */}
+          <img
+            src={logo}
+            alt="Logo"
+            className="h-16 md:h-18 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+          />
+
+          {/* TEXTO */}
+          <div className="flex flex-col leading-[1.1]">
+            <span className="hidden md:block text-[15px] tracking-[0.25em] uppercase text-gold/90 font-sans font-light">
+              Ricardo Marques
+            </span>
+            <span className="font-serif text-xl md:text-1xl font-light tracking-[0.02em] text-cream">
+              Advogados Associados
+            </span>
+          </div>
         </Link>
 
         {/* Desktop nav */}

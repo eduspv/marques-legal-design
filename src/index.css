@@ -187,3 +187,13 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--deep-blue) / 0.5);
 }
+
+/* Adicionar no src/index.css — fallback global */
+/* Evita flash de branco durante carregamento antes do React montar */
+
+html,
+body,
+#root {
+  background-color: #FAF7F2;
+  min-height: 100%;
+}

@@ -25,7 +25,7 @@ const SocialResponsibility = () => {
   const [activeStage, setActiveStage] = useState(0);
 
   return (
-    <section className="section-padding bg-cream overflow-hidden">
+    <section className="section-padding bg-background overflow-hidden">
       <div className="container-editorial">
         <RevealOnScroll>
           <div className="flex items-center gap-4 mb-4">
