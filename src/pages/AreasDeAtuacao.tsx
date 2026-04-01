@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import RevealOnScroll from "@/components/shared/RevealOnScroll";
 import areasHeaderImage from "@/assets/areas/areas-header.png";
+import useFooterTheme from "@/hooks/useFooterTheme"; // 👈 IMPORTANTE
 
 const iconMap = {
   Building2,
@@ -31,10 +32,14 @@ const iconMap = {
 const AreasDeAtuacao = () => {
   const [gridMode, setGridMode] = useState<"1" | "2">("1");
 
+  // 👇 ISSO AQUI ATIVA O DARK
+  useFooterTheme("footer-theme-trigger");
+
   return (
     <div className="min-h-screen">
       <Navbar />
 
+      {/* HEADER */}
       <section
         className="relative pt-60 pb-24 overflow-hidden bg-deep-blue"
         style={{
@@ -62,6 +67,7 @@ const AreasDeAtuacao = () => {
         </div>
       </section>
 
+      {/* LISTA */}
       <section className="section-padding bg-background">
         <div className="container-editorial">
           <div className="flex justify-end mb-10 gap-3">
@@ -102,14 +108,11 @@ const AreasDeAtuacao = () => {
                 <RevealOnScroll key={area.id} delay={i * 0.05}>
                   <Link
                     to={`/areas-de-atuacao/${area.id}`}
-                    className={`
-                      relative group block overflow-hidden
-                      ${
-                        gridMode === "2"
-                          ? "py-10 border-b border-border min-h-full"
-                          : "py-12 md:py-16 pr-10 md:pr-16"
-                      }
-                    `}
+                    className={`relative group block overflow-hidden ${
+                      gridMode === "2"
+                        ? "py-10 border-b border-border min-h-full"
+                        : "py-12 md:py-16 pr-10 md:pr-16"
+                    }`}
                   >
                     <div className="absolute inset-0 bg-[#263D55]/0 group-hover:bg-[#263D55]/[0.03] transition-colors duration-500 pointer-events-none" />
 
@@ -122,32 +125,25 @@ const AreasDeAtuacao = () => {
                           : "relative z-10 grid grid-cols-1 md:grid-cols-11 gap-6 md:gap-12 items-start"
                       }
                     >
-                      <div className={gridMode === "2" ? "flex items-start" : "md:col-span-2 flex items-start"}>
-                        <div className="w-16 h-16 md:w-20 ml-4 md:h-20 rounded-2xl border border-gold/20  flex items-center justify-center transition-all duration-300 group-hover:bg-gold/10 group-hover:scale-105 group-hover:shadow-[0_10px_30px_rgba(38,61,85,0.10)]">
+                      <div className="md:col-span-2 flex items-start">
+                        <div className="w-16 h-16 md:w-20 ml-4 md:h-20 rounded-2xl border border-gold/20 flex items-center justify-center transition-all duration-300 group-hover:bg-gold/10">
                           {Icon && (
-                            <Icon
-                              className="w-8 h-8 md:w-10 md:h-10 text-gold"
-                              strokeWidth={1.6}
-                            />
+                            <Icon className="w-8 h-8 md:w-10 md:h-10 text-gold" strokeWidth={1.6} />
                           )}
                         </div>
                       </div>
 
-                      <div className={gridMode === "2" ? "" : "md:col-span-3"}>
-                        <h3 className="heading-editorial text-2xl md:text-3xl text-foreground transition-all duration-300 group-hover:text-gold">
+                      <div className="md:col-span-3">
+                        <h3 className="heading-editorial text-2xl md:text-3xl text-foreground group-hover:text-gold">
                           {area.title}
                         </h3>
                       </div>
 
-                      <div className={gridMode === "2" ? "" : "md:col-span-6"}>
-                        <p className="text-muted-foreground font-sans text-sm leading-relaxed transition-colors duration-300 group-hover:text-foreground/80">
+                      <div className="md:col-span-6">
+                        <p className="text-muted-foreground text-sm leading-relaxed group-hover:text-foreground/80">
                           {area.description}
                         </p>
                       </div>
-                    </div>
-
-                    <div className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2">
-                      <ArrowRight className="w-5 h-5 text-gold/0 translate-x-0 transition-all duration-300 group-hover:text-gold group-hover:translate-x-2" />
                     </div>
                   </Link>
                 </RevealOnScroll>
@@ -155,7 +151,11 @@ const AreasDeAtuacao = () => {
             })}
           </div>
         </div>
+        {/* 👇 GATILHO DO DARK MODE */}
+      <div id="footer-theme-trigger" className="h-[200px]" />
       </section>
+
+      
 
       <Footer />
     </div>

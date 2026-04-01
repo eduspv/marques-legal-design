@@ -3,9 +3,12 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { articles } from "@/data/articles";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import useFooterTheme from "@/hooks/useFooterTheme";
 
 const ArtigoDetail = () => {
   const { id } = useParams();
+  useFooterTheme("footer-theme-trigger");
+
   const article = articles.find((a) => a.id === id);
   const relatedArticles = articles.filter((a) => a.id !== id).slice(0, 3);
 
@@ -60,7 +63,7 @@ const ArtigoDetail = () => {
       </section>
 
       {/* Content */}
-      <section className="section-padding bg-cream">
+      <section className="section-padding bg-background">
         <div className="container-editorial max-w-3xl">
           <div className="prose-editorial">
             {article.content.split("\n\n").map((paragraph, i) => (
@@ -101,6 +104,8 @@ const ArtigoDetail = () => {
             ))}
           </div>
         </div>
+        {/* 👇 GATILHO DO DARK MODE */}
+      <div id="footer-theme-trigger" className="h-[200px]" />
       </section>
 
       <Footer />

@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { practiceAreas } from "@/data/practiceAreas";
+import useFooterTheme from "@/hooks/useFooterTheme";
 import {
   ArrowLeft,
   ArrowRight,
@@ -28,6 +29,7 @@ const iconMap = {
 
 const AreaDetail = () => {
   const { id } = useParams();
+  useFooterTheme("footer-theme-trigger");
   const area = practiceAreas.find((a) => a.id === id);
   const relatedAreas = practiceAreas.filter((a) => a.id !== id).slice(0, 3);
 
@@ -274,6 +276,8 @@ const AreaDetail = () => {
             })}
           </div>
         </div>
+        {/* 👇 GATILHO DO DARK MODE */}
+      <div id="footer-theme-trigger" className="h-[200px]" />
       </section>
 
       <Footer />

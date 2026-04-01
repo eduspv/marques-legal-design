@@ -2,10 +2,12 @@ import { Link, useParams } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { news } from "@/data/news";
+import useFooterTheme from "@/hooks/useFooterTheme";
 
 const NewsDetail = () => {
   const { id } = useParams();
   const article = news.find((item) => item.id === id);
+  useFooterTheme("footer-theme-trigger");
 
   if (!article) {
     return (
@@ -24,13 +26,14 @@ const NewsDetail = () => {
             </Link>
           </div>
         </section>
+
         <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-cream">
+    <div className="min-h-screen bg-background">
       <Navbar />
 
       {/* Hero da notícia */}
@@ -98,6 +101,8 @@ const NewsDetail = () => {
             ))}
           </div>
         </div>
+        {/* 👇 GATILHO DO DARK MODE */}
+      <div id="footer-theme-trigger" className="h-[200px]" />
       </section>
 
       <Footer />

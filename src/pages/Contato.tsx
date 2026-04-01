@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Mail, Clock, ArrowUpRight } from "lucide-react";
 import headerImage from "@/assets/contato/hero.png";
 import RevealOnScroll from "@/components/shared/RevealOnScroll";
+import useFooterTheme from "@/hooks/useFooterTheme";
 
 
 const Contato = () => {
@@ -13,6 +14,7 @@ const Contato = () => {
     email: "",
     mensagem: "",
   });
+  useFooterTheme("footer-theme-trigger");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -190,7 +192,8 @@ const Contato = () => {
           </RevealOnScroll>
         </div>
       </div>
-      <div id="footer-theme-trigger" className="h-24 w-full" />
+      {/* 👇 GATILHO DO DARK MODE */}
+      <div id="footer-theme-trigger" className="h-[200px]" />
     </section>
       
 

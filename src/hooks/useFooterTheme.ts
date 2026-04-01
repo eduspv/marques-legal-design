@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-const useFooterTheme = () => {
+const useFooterTheme = (triggerId = "footer-theme-trigger") => {
   const [isFooterDark, setIsFooterDark] = useState(false);
 
   useEffect(() => {
-    const trigger = document.getElementById("footer-theme-trigger");
+    const trigger = document.getElementById(triggerId);
     if (!trigger) return;
 
     const observer = new IntersectionObserver(
@@ -20,7 +20,7 @@ const useFooterTheme = () => {
     observer.observe(trigger);
 
     return () => observer.disconnect();
-  }, []);
+  }, [triggerId]);
 
   useEffect(() => {
     const root = document.documentElement;

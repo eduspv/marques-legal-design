@@ -8,6 +8,7 @@ import { news } from "@/data/news";
 import heroBg1 from "@/assets/HeroPage/hero_background.png";
 import heroBg3 from "@/assets/HeroPage/hero_background2.png";
 import heroBg2 from "@/assets/HeroPage/hero_background3.png";
+import heroVideo from "@/assets/HeroPage/hero_background.mp4";
 
 const Hero = () => {
   const recentNews = news.slice(0, 4);

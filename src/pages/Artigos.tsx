@@ -6,9 +6,11 @@ import { articles, articleCategories } from "@/data/articles";
 import { ArrowRight } from "lucide-react";
 import RevealOnScroll from "@/components/shared/RevealOnScroll";
 import headerImage from "@/assets/articles/articles-header.png";
+import useFooterTheme from "@/hooks/useFooterTheme";
 
 const Artigos = () => {
   const [activeCategory, setActiveCategory] = useState("Todos");
+  useFooterTheme("footer-theme-trigger");
 
   const filtered =
     activeCategory === "Todos"
@@ -93,6 +95,8 @@ const Artigos = () => {
             ))}
           </div>
         </div>
+        {/* 👇 GATILHO DO DARK MODE */}
+      <div id="footer-theme-trigger" className="h-[200px]" />
       </section>
 
       <Footer />
