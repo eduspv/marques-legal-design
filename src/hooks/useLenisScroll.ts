@@ -1,6 +1,12 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 
+declare global {
+  interface Window {
+    __lenis?: Lenis;
+  }
+}
+
 export function useLenisScroll() {
   useEffect(() => {
     const lenis = new Lenis({
@@ -11,6 +17,8 @@ export function useLenisScroll() {
       touchMultiplier: 1,
       infinite: false,
     });
+
+    window.__lenis = lenis;
 
     let frameId: number;
 
@@ -24,6 +32,7 @@ export function useLenisScroll() {
     return () => {
       cancelAnimationFrame(frameId);
       lenis.destroy();
+      delete window.__lenis;
     };
   }, []);
 }

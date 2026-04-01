@@ -35,29 +35,27 @@ const AboutSection = () => {
           {/* IMAGEM COM PARALLAX */}
           <div className="lg:col-span-5">
             <RevealOnScroll delay={0.1}>
-              {/*
-                overflow-hidden OBRIGATÓRIO — esconde a imagem
-                que vai além do container quando se move
-              */}
               <div
-                className="overflow-hidden"
+                className="relative overflow-hidden"
                 style={{ height: "520px" }}
               >
-                <img
+                <div
                   ref={imgRef}
-                  src={aboutTabs[openIndex >= 0 ? openIndex : 0].image}
-                  alt={aboutTabs[openIndex >= 0 ? openIndex : 0].title}
-                  className="w-full object-cover"
+                  className="absolute left-0 top-1/2 w-full"
                   style={{
-                    // Imagem mais alta que o container — cria a "área de movimento"
-                    // Quanto maior esse valor vs height do container, mais ela pode se mover
-                    height: "130%",
-                    // GPU — igual ao Hafnia que usa translate3d
+                    height: "140%",
                     willChange: "transform",
-                    // Transição não precisa pois é atualizado via rAF
-                     objectPosition: "center 30%", 
                   }}
-                />
+                >
+                  <img
+                    src={aboutTabs[openIndex >= 0 ? openIndex : 0].image}
+                    alt={aboutTabs[openIndex >= 0 ? openIndex : 0].title}
+                    className="w-full h-full object-cover"
+                    style={{
+                      objectPosition: "center 30%",
+                    }}
+                  />
+                </div>
               </div>
             </RevealOnScroll>
           </div>

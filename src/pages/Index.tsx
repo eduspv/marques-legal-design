@@ -7,8 +7,7 @@ import TeamSection from "@/components/home/TeamSection";
 import Testimonials from "@/components/home/Testimonials";
 import ContactSection from "@/components/home/ContactSection";
 
-// background não passado = usa o padrão #FAF7F2 (cream)
-// Para mudar: <PageLayout background="#243B52"> ou qualquer cor CSS
+
 
 const Index = () => {
   return (

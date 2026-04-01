@@ -1,8 +1,19 @@
+import { useRef } from "react";
 import { Link } from "react-router-dom";
+import { useInViewport } from "@/hooks/useInViewport";
 
 const Footer = () => {
+  const footerRef = useRef<HTMLElement | null>(null);
+  const isInViewport = useInViewport(footerRef, {
+    threshold: 0.,
+  });
   return (
-    <footer className="bg-deep-blue text-cream">
+    <footer
+      ref={footerRef}
+      className={`bg-background text-foreground theme-shift ${
+        isInViewport ? "dark-section" : ""
+      }`}
+    >
       <div className="container-editorial py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand */}

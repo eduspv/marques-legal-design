@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -12,50 +12,83 @@ const navLinks = [
   { label: "Contato", path: "/contato" },
 ];
 
-const Navbar = () => {
+interface NavbarProps {
+  isFooterDark?: boolean;
+}
+
+const Navbar = ({ isFooterDark = false }: NavbarProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+
   const location = useLocation();
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const threshold = 10;
+
+      setIsScrolled(currentScrollY > 50);
+
+      if (Math.abs(currentScrollY - lastScrollY.current) < threshold) return;
+
+      if (currentScrollY <= 20) {
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY.current) {
+        setIsVisible(false); // descendo
+      } else {
+        setIsVisible(true); // subindo
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     setIsMobileOpen(false);
+    setIsVisible(true);
   }, [location]);
+
+  const navBackground = isScrolled
+    ? isFooterDark
+      ? "bg-[#08131f]/95 backdrop-blur-md shadow-lg py-3"
+      : "bg-deep-blue/95 backdrop-blur-md shadow-lg py-3"
+    : "bg-transparent py-6";
+
+  const textColor = "text-cream";
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? "bg-deep-blue/95 backdrop-blur-md shadow-lg py-3"
-          : "bg-transparent py-6"
-      }`}
+        isVisible || isMobileOpen ? "translate-y-0" : "-translate-y-full"
+      } ${navBackground}`}
     >
       <div className="container-editorial flex items-center justify-between">
         <Link to="/" className="relative z-10 flex items-center gap-4 group">
-          {/* LOGO */}
           <img
             src={logo}
             alt="Logo"
             className="h-16 md:h-18 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
           />
 
-          {/* TEXTO */}
           <div className="flex flex-col leading-[1.1]">
             <span className="hidden md:block text-[15px] tracking-[0.25em] uppercase text-gold/90 font-sans font-light">
               Ricardo Marques
             </span>
-            <span className="font-serif text-xl md:text-1xl font-light tracking-[0.02em] text-cream">
+            <span
+              className={`font-serif text-xl md:text-1xl font-light tracking-[0.02em] ${textColor}`}
+            >
               Advogados Associados
             </span>
           </div>
         </Link>
 
-        {/* Desktop nav */}
         <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
@@ -72,7 +105,6 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Mobile toggle */}
         <button
           onClick={() => setIsMobileOpen(!isMobileOpen)}
           className="lg:hidden text-cream z-10"
@@ -81,7 +113,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
@@ -89,7 +120,9 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden absolute top-0 left-0 right-0 bg-deep-blue-dark pt-24 pb-8 px-6"
+            className={`lg:hidden absolute top-0 left-0 right-0 pt-24 pb-8 px-6 ${
+              isFooterDark ? "bg-[#08131f]" : "bg-deep-blue-dark"
+            }`}
           >
             {navLinks.map((link, i) => (
               <motion.div

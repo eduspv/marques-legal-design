@@ -1,21 +1,18 @@
 import { useEffect, useRef } from "react";
 
-// Parallax via transform: translateY() — igual ao Hafnia
-// A imagem é maior que o container (overflow: hidden no pai)
-// O JS move a imagem verticalmente conforme o scroll
-// Resultado: o "recorte" visível muda sem a imagem sair do lugar
-
 interface Options {
-  // Intensidade do movimento — Hafnia usa ~0.15
-  // 0.1 = sutil | 0.15 = igual Hafnia | 0.3 = dramático
   speed?: number;
+  maxOffset?: number;
 }
 
 export function useParallaxImage<T extends HTMLElement>(
   options: Options = {}
 ) {
-  const { speed = 0.15 } = options;
+  const { speed = 0.05, maxOffset = 12 } = options;
   const ref = useRef<T>(null);
+
+  const lastScrollY = useRef(0);
+  const currentTranslate = useRef(0);
 
   useEffect(() => {
     const el = ref.current;
@@ -24,37 +21,53 @@ export function useParallaxImage<T extends HTMLElement>(
     let ticking = false;
 
     const update = () => {
-      if (!el) return;
+      const parent = el.parentElement;
+      if (!parent) return;
 
-      const rect = el.parentElement!.getBoundingClientRect();
+      const rect = parent.getBoundingClientRect();
       const viewportH = window.innerHeight;
 
-      // Progresso: quanto o centro do container está deslocado do centro da tela
-      // -1 = container todo abaixo da tela | 0 = centro | 1 = todo acima
+      const scrollY = window.scrollY;
+
+      // detectar direção
+      const direction = scrollY > lastScrollY.current ? 1 : -1;
+      lastScrollY.current = scrollY;
+
+      // progresso baseado no centro (igual Hafnia)
       const progress =
         (rect.top + rect.height / 2 - viewportH / 2) / viewportH;
 
-      // translateY em % relativo à altura da própria imagem
-      // Negativo = move para cima (igual ao Hafnia: translate(0%, -15.227%))
-      const translateY = progress * speed * 100;
+      // cálculo base
+      let target = progress * speed * 100;
 
-      el.style.transform = `translateY(${translateY}%)`;
+      // clamp para não escapar
+      target = Math.max(-maxOffset, Math.min(maxOffset, target));
+
+      // 🔥 suavização (ESSENCIAL)
+      currentTranslate.current += (target - currentTranslate.current) * 0.08;
+
+      el.style.transform = `translate3d(0, calc(-50% + ${currentTranslate.current}%), 0)`;
 
       ticking = false;
     };
 
-    const onScroll = () => {
+    const requestUpdate = () => {
       if (!ticking) {
         requestAnimationFrame(update);
         ticking = true;
       }
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    update(); // posição inicial
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
 
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [speed]);
+    requestUpdate();
+
+    return () => {
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
+  }, [speed, maxOffset]);
 
   return ref;
 }
