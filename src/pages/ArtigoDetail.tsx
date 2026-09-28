@@ -3,11 +3,11 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { articles } from "@/data/articles";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import useFooterTheme from "@/hooks/useFooterTheme";
+
 
 const ArtigoDetail = () => {
   const { id } = useParams();
-  useFooterTheme("footer-theme-trigger");
+
 
   const article = articles.find((a) => a.id === id);
   const relatedArticles = articles.filter((a) => a.id !== id).slice(0, 3);

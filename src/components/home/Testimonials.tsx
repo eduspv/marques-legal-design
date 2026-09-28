@@ -68,15 +68,6 @@ const Testimonials = () => {
                         "{t.quote}"
                       </blockquote>
                     </div>
-
-                    <div className="mt-8">
-                      <p className="text-black font-sans text-sm font-medium">
-                        {t.name}
-                      </p>
-                      <p className="text-black/60 font-sans text-xs mt-1">
-                        {t.role} — {t.company}
-                      </p>
-                    </div>
                   </div>
                 </article>
               </SwiperSlide>

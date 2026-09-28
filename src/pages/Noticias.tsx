@@ -5,12 +5,12 @@ import Footer from "@/components/layout/Footer";
 import { news } from "@/data/news";
 import RevealOnScroll from "@/components/shared/RevealOnScroll";
 import headerImage from "@/assets/news/hero/hero.png";
-import useFooterTheme from "@/hooks/useFooterTheme";
+
 const categories = ["Todos", "Institucional", "Internacional", "Eventos", "Publicações"];
 
 const Noticias = () => {
   const [activeCategory, setActiveCategory] = useState("Todos");
-  useFooterTheme("footer-theme-trigger");
+
 
   const filtered =
     activeCategory === "Todos"

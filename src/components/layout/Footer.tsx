@@ -1,12 +1,17 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useInViewport } from "@/hooks/useInViewport";
+import useFooterTheme from "@/hooks/useFooterTheme";
 
 const Footer = () => {
   const footerRef = useRef<HTMLElement | null>(null);
+
+  useFooterTheme(footerRef);
+
   const isInViewport = useInViewport(footerRef, {
-    threshold: 0.,
+    threshold: 0.2,
   });
+
   return (
     <footer
       ref={footerRef}
@@ -25,7 +30,8 @@ const Footer = () => {
               Advogados Associados
             </p>
             <p className="text-cream/60 text-sm mt-6 leading-relaxed font-sans">
-              Excelência jurídica com compromisso institucional e visão estratégica.
+              Excelência jurídica com compromisso institucional e visão
+              estratégica.
             </p>
           </div>
 
@@ -60,9 +66,16 @@ const Footer = () => {
               Áreas de Atuação
             </h4>
             <ul className="space-y-3">
-              {["Direito Empresarial", "Direito Tributário", "Direito Civil", "Direito Digital"].map((area) => (
+              {[
+                "Direito Empresarial",
+                "Direito Tributário",
+                "Direito Civil",
+                "Direito Digital",
+              ].map((area) => (
                 <li key={area}>
-                  <span className="text-cream/60 text-sm font-sans">{area}</span>
+                  <span className="text-cream/60 text-sm font-sans">
+                    {area}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -74,19 +87,24 @@ const Footer = () => {
               Contato
             </h4>
             <div className="space-y-3 text-cream/60 text-sm font-sans">
-              <p>Av. Paulista, 1842 — 15º andar</p>
-              <p>São Paulo — SP, 01310-200</p>
-              <p className="mt-4">+55 (11) 3000-0000</p>
-              <p>contato@ricadomarques.adv.br</p>
+              <p>SCN, Quadra 1, Bloco F, Ed. America Office Tower sala 317 asa norte</p>
+              <p>BRASÍLIA - DF</p>
+
+              <p className="mt-4">RUA DO ACRE, 83, 11º ANDAR, SALA 1106 - CENTRO</p>
+              <p>RIO DE JANEIRO - RJ</p>
+
+              <p className="mt-4">+55 (61) 3526-6972</p>
+              <p>rmadv@rmadvassociados.com.br</p>
             </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
         <div className="mt-16 pt-8 border-t border-cream/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-cream/40 text-xs font-sans">
-            © {new Date().getFullYear()} Ricardo Marques Advogados Associados. Todos os direitos reservados.
+            © {new Date().getFullYear()} Ricardo Marques Advogados Associados.
+            Todos os direitos reservados.
           </p>
+
           <div className="flex gap-6">
             <span className="text-cream/40 text-xs font-sans hover:text-gold transition-colors cursor-pointer">
               Política de Privacidade

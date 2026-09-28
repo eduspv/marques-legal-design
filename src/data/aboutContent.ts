@@ -1,4 +1,4 @@
-import aboutImage from "@/assets/AboutSection/about-image.png";
+import aboutImage from "@/assets/AboutSection/about-image.jpeg";
 import type { ReactNode } from "react";
 
 export interface AboutTab {

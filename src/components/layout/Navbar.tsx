@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Instagram, Linkedin, Phone } from "lucide-react";
 import logo from "@/assets/Logo/RmLogo-SemFundo.png";
 
 const navLinks = [
@@ -36,9 +36,9 @@ const Navbar = ({ isFooterDark = false }: NavbarProps) => {
       if (currentScrollY <= 20) {
         setIsVisible(true);
       } else if (currentScrollY > lastScrollY.current) {
-        setIsVisible(false); // descendo
+        setIsVisible(false);
       } else {
-        setIsVisible(true); // subindo
+        setIsVisible(true);
       }
 
       lastScrollY.current = currentScrollY;
@@ -55,13 +55,18 @@ const Navbar = ({ isFooterDark = false }: NavbarProps) => {
     setIsVisible(true);
   }, [location]);
 
+  // Fundo sempre escuro — sombra só aparece ao scrollar
   const navBackground = isScrolled
-    ? isFooterDark
-      ? "bg-[#08131f]/95 backdrop-blur-md shadow-lg py-3"
-      : "bg-deep-blue/95 backdrop-blur-md shadow-lg py-3"
-    : "bg-transparent py-6";
+    ? "bg-[#08131f] backdrop-blur-md shadow-lg py-3"
+    : "bg-[#08131f] py-4";
 
-  const textColor = "text-cream";
+  // Cores únicas — sempre as do modo scrolled
+  const textColor = "text-white";
+  const goldColor = "text-[#C9A96E]";
+  const linkColor = "text-white/90 hover:text-[#C9A96E]";
+  const iconColor = "text-white/60 hover:text-[#C9A96E]";
+  const dividerColor = "bg-[#C9A96E]/25";
+  const brandGoldColor = "text-[#D4AF70]";
 
   return (
     <nav
@@ -78,9 +83,12 @@ const Navbar = ({ isFooterDark = false }: NavbarProps) => {
           />
 
           <div className="flex flex-col leading-[1.1]">
-            <span className="hidden md:block text-[15px] tracking-[0.25em] uppercase text-gold/90 font-sans font-light">
+            <span
+              className={`hidden md:block text-[15px] tracking-[0.25em] uppercase font-sans font-light ${brandGoldColor}`}
+            >
               Ricardo Marques
             </span>
+
             <span
               className={`font-serif text-xl md:text-1xl font-light tracking-[0.02em] ${textColor}`}
             >
@@ -94,20 +102,49 @@ const Navbar = ({ isFooterDark = false }: NavbarProps) => {
             <Link
               key={link.path}
               to={link.path}
-              className={`text-xs tracking-[0.15em] uppercase font-sans font-medium transition-colors duration-300 ${
-                location.pathname === link.path
-                  ? "text-gold"
-                  : "text-cream/80 hover:text-gold"
+              className={`text-xs tracking-[0.15em] uppercase font-sans font-medium transition-all duration-300 ${
+                location.pathname === link.path ? goldColor : linkColor
               }`}
             >
               {link.label}
             </Link>
           ))}
+
+          <div className={`h-4 w-px mx-2 ${dividerColor}`} />
+
+          <div className="flex items-center gap-4">
+            <a
+              href="https://www.instagram.com/rmadvogadosoficial/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`transition-all duration-300 hover:-translate-y-[1px] ${iconColor}`}
+            >
+              <Instagram size={16} />
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/rm-advogados-associados/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`transition-all duration-300 hover:-translate-y-[1px] ${iconColor}`}
+            >
+              <Linkedin size={16} />
+            </a>
+
+            <a
+              href="https://wa.me/5521984100046"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`transition-all duration-300 hover:-translate-y-[1px] ${iconColor}`}
+            >
+              <Phone size={16} />
+            </a>
+          </div>
         </div>
 
         <button
           onClick={() => setIsMobileOpen(!isMobileOpen)}
-          className="lg:hidden text-cream z-10"
+          className={`lg:hidden z-10 ${textColor}`}
         >
           {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -120,9 +157,7 @@ const Navbar = ({ isFooterDark = false }: NavbarProps) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className={`lg:hidden absolute top-0 left-0 right-0 pt-24 pb-8 px-6 ${
-              isFooterDark ? "bg-[#08131f]" : "bg-deep-blue-dark"
-            }`}
+            className="lg:hidden absolute top-0 left-0 right-0 pt-24 pb-8 px-6 bg-[#08131f]"
           >
             {navLinks.map((link, i) => (
               <motion.div
@@ -135,14 +170,43 @@ const Navbar = ({ isFooterDark = false }: NavbarProps) => {
                   to={link.path}
                   className={`block py-3 text-sm tracking-[0.15em] uppercase font-sans transition-colors ${
                     location.pathname === link.path
-                      ? "text-gold"
-                      : "text-cream/80 hover:text-gold"
+                      ? "text-[#C9A96E]"
+                      : "text-white/80 hover:text-[#C9A96E]"
                   }`}
                 >
                   {link.label}
                 </Link>
               </motion.div>
             ))}
+
+            <div className="flex items-center justify-center gap-6 mt-6 pt-6 border-t border-[#C9A96E]/20">
+              <a
+                href="https://www.instagram.com/rmadvogadosoficial/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-[#C9A96E] transition"
+              >
+                <Instagram size={20} />
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/rm-advogados-associados/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-[#C9A96E] transition"
+              >
+                <Linkedin size={20} />
+              </a>
+
+              <a
+                href="https://wa.me/5521984100046"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-[#C9A96E] transition"
+              >
+                <Phone size={20} />
+              </a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

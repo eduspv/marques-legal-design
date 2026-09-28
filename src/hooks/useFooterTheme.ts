@@ -1,42 +1,32 @@
-import { useEffect, useState } from "react";
+import { useEffect, RefObject } from "react";
 
-const useFooterTheme = (triggerId = "footer-theme-trigger") => {
-  const [isFooterDark, setIsFooterDark] = useState(false);
-
+const useFooterTheme = (targetRef: RefObject<HTMLElement | null>) => {
   useEffect(() => {
-    const trigger = document.getElementById(triggerId);
-    if (!trigger) return;
+    const element = targetRef.current;
+    if (!element) return;
+
+    const root = document.documentElement;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsFooterDark(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          root.classList.add("dark");
+        } else {
+          root.classList.remove("dark");
+        }
       },
       {
-        threshold: 0.6,
-        rootMargin: "0px 0px -5% 0px",
+        threshold: 0.05,
       }
     );
 
-    observer.observe(trigger);
-
-    return () => observer.disconnect();
-  }, [triggerId]);
-
-  useEffect(() => {
-    const root = document.documentElement;
-
-    if (isFooterDark) {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
+    observer.observe(element);
 
     return () => {
+      observer.disconnect();
       root.classList.remove("dark");
     };
-  }, [isFooterDark]);
-
-  return { isFooterDark };
+  }, [targetRef]);
 };
 
 export default useFooterTheme;

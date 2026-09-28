@@ -1,7 +1,7 @@
 import { useState } from "react";
 import imgCapacitacao from "@/assets/Capacitacao/capacitacao1.png";
 import imgEstagio from "@/assets/Capacitacao/capacitacao2.png";
-import imgResidencia from "@/assets/Capacitacao/capacitacao3.png";
+import imgResidencia from "@/assets/Capacitacao/capacitacao3.jpeg";
 
 const stages = [
   {

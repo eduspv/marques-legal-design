@@ -112,7 +112,7 @@ const ContactSection = () => {
           <RevealOnScroll className="lg:col-span-5" delay={0.2}>
             <div className="space-y-5 lg:pl-8">
               <a
-                href="https://maps.google.com/?q=Av.+Paulista,+1842,+São+Paulo"
+                href="https://maps.app.goo.gl/AgbwZgwdeQkJMbkcA"
                 target="_blank"
                 rel="noreferrer"
                 className="group block rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:bg-white/[0.05] hover:shadow-[0_10px_30px_rgba(0,0,0,0.18)]"
@@ -121,19 +121,39 @@ const ContactSection = () => {
                   <MapPin className="w-5 h-5 text-gold flex-shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110" />
                   <div>
                     <p className="text-foreground font-sans text-sm font-medium">
-                      Endereço
+                      Brasilia
                     </p>
                     <p className="text-muted-foreground font-sans text-sm mt-1">
-                      Av. Paulista, 1842 — 15º andar
+                      SCN, Quadra 1, Bloco F, Ed. America Office Tower sala 317 asa norte
                       <br />
-                      São Paulo — SP, 01310-200
+                      BRASÍLIA - DF
+                    </p>
+                  </div>
+                </div>
+              </a>
+              <a
+                href="https://maps.app.goo.gl/AgbwZgwdeQkJMbkcA"
+                target="_blank"
+                rel="noreferrer"
+                className="group block rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:bg-white/[0.05] hover:shadow-[0_10px_30px_rgba(0,0,0,0.18)]"
+              >
+                <div className="flex gap-4">
+                  <MapPin className="w-5 h-5 text-gold flex-shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110" />
+                  <div>
+                    <p className="text-foreground font-sans text-sm font-medium">
+                      Rio de Janeiro
+                    </p>
+                    <p className="text-muted-foreground font-sans text-sm mt-1">
+                      RUA DO ACRE, 83, 11º ANDAR, SALA 1106 - CENTRO
+                      <br />
+                     RIO DE JANEIRO - RJ
                     </p>
                   </div>
                 </div>
               </a>
 
               <a
-                href="tel:+551130000000"
+                href="tel:+556135266972"
                 className="group block rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:bg-white/[0.05] hover:shadow-[0_10px_30px_rgba(0,0,0,0.18)]"
               >
                 <div className="flex gap-4">
@@ -143,7 +163,7 @@ const ContactSection = () => {
                       Telefone
                     </p>
                     <p className="text-muted-foreground font-sans text-sm mt-1">
-                      +55 (11) 3000-0000
+                      +55 (61) 3526-6972
                     </p>
                   </div>
                 </div>
@@ -160,7 +180,7 @@ const ContactSection = () => {
                       E-mail
                     </p>
                     <p className="text-muted-foreground font-sans text-sm mt-1">
-                      contato@ricadomarques.adv.br
+                      rmadv@rmadvassociados.com.br
                     </p>
                   </div>
                 </div>

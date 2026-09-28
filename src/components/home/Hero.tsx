@@ -8,7 +8,6 @@ import { news } from "@/data/news";
 import heroBg1 from "@/assets/HeroPage/hero_background.png";
 import heroBg3 from "@/assets/HeroPage/hero_background2.png";
 import heroBg2 from "@/assets/HeroPage/hero_background3.png";
-import heroVideo from "@/assets/HeroPage/hero_background.mp4";
 
 const Hero = () => {
   const recentNews = news.slice(0, 4);
@@ -22,6 +21,9 @@ const Hero = () => {
   ];
 
   const heroImages = [heroBg1, heroBg2, heroBg3];
+
+  // bg-position por imagem: primeira usa "top", as demais mantêm "center"
+  const heroPositions = ["top", "center", "center"];
 
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -89,8 +91,11 @@ const Hero = () => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.2, ease: "easeInOut" }}
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url(${heroImages[currentImageIndex]})` }}
+              className="absolute inset-0 bg-cover"
+              style={{
+                backgroundImage: `url(${heroImages[currentImageIndex]})`,
+                backgroundPosition: heroPositions[currentImageIndex],
+              }}
             />
           </AnimatePresence>
 

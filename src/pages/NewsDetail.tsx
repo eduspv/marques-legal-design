@@ -2,12 +2,12 @@ import { Link, useParams } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { news } from "@/data/news";
-import useFooterTheme from "@/hooks/useFooterTheme";
+
 
 const NewsDetail = () => {
   const { id } = useParams();
   const article = news.find((item) => item.id === id);
-  useFooterTheme("footer-theme-trigger");
+
 
   if (!article) {
     return (

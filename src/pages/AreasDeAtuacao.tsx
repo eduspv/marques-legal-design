@@ -16,7 +16,6 @@ import {
 } from "lucide-react";
 import RevealOnScroll from "@/components/shared/RevealOnScroll";
 import areasHeaderImage from "@/assets/areas/areas-header.png";
-import useFooterTheme from "@/hooks/useFooterTheme"; // 👈 IMPORTANTE
 
 const iconMap = {
   Building2,
@@ -32,8 +31,7 @@ const iconMap = {
 const AreasDeAtuacao = () => {
   const [gridMode, setGridMode] = useState<"1" | "2">("1");
 
-  // 👇 ISSO AQUI ATIVA O DARK
-  useFooterTheme("footer-theme-trigger");
+
 
   return (
     <div className="min-h-screen">

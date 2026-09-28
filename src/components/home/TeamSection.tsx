@@ -1,8 +1,8 @@
 import RevealOnScroll from "@/components/shared/RevealOnScroll";
 import { useParallaxImage } from "@/hooks/useParallaxImage";
 import ricardoImg from "@/assets/team/ricardo-marques.jpeg";
-import civilImg from "@/assets/team/civil-lawyer.jpeg";
-import tributarioImg from "@/assets/team/tributario-lawyer.jpeg";
+import civilImg from "@/assets/team/civil-lawyer.png";
+import tributarioImg from "@/assets/team/tributario-lawyer.png";
 import teamGroupImg from "@/assets/team/teamgroup/team-group.png";
 
 const TeamSection = () => {
@@ -47,7 +47,7 @@ const TeamSection = () => {
       <article className="border border-foreground/10 bg-background mb-10 md:mb-14">
         <div
           className="relative overflow-hidden"
-          style={{ height: "450px" }}
+          style={{ height: "480px" }}
         >
           <img
             ref={teamImgRef}
@@ -55,9 +55,9 @@ const TeamSection = () => {
             alt="Equipe completa Ricardo Marques Advogados"
             className="absolute left-0 top-1/2 w-full object-cover"
             style={{
-              height: "120%",
+              height: "130%",
               willChange: "transform",
-              objectPosition: "center center",
+              objectPosition: "top center",
             }}
           />
         </div>
@@ -70,7 +70,7 @@ const TeamSection = () => {
         <article className="group border border-foreground/10 bg-background overflow-hidden">
           <div
             className="relative overflow-hidden"
-            style={{ height: "520px" }}
+            style={{ height: "830px" }}
           >
             <img
               ref={ricardoImgRef}
@@ -80,7 +80,7 @@ const TeamSection = () => {
               style={{
                 height: "130%",
                 willChange: "transform",
-                objectPosition: "top",
+                objectPosition: "center ",
               }}
             />
 
@@ -110,7 +110,7 @@ const TeamSection = () => {
           <article className="group border border-foreground/10 bg-background overflow-hidden">
             <div
               className="relative overflow-hidden"
-              style={{ height: "247px" }}
+              style={{ height: "400px" }}
             >
               <img
                 ref={civilImgRef}
@@ -147,7 +147,7 @@ const TeamSection = () => {
           <article className="group border border-foreground/10 bg-background overflow-hidden">
             <div
               className="relative overflow-hidden"
-              style={{ height: "247px" }}
+              style={{ height: "400px" }}
             >
               <img
                 ref={tributarioImgRef}
